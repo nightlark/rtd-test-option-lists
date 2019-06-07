@@ -1,32 +1,16 @@
-.. TraceR documentation master file, created by
-   sphinx-quickstart on Mon Aug  6 16:00:19 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+User Guide
+==========
 
-TraceR documentation!
-==================================
+Below, we provide detailed instructions for how to start doing network
+simulations using TraceR.
 
-TraceR is a trace replay tool built upon the ROSS-based CODES simulation
-framework. TraceR can be used for predicting network performance and
-understanding network behavior by simulating messaging in High Performance
-Computing applications on interconnection networks.
+Quickstart
+----------
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+This is a basic ``mpirun`` command to launch a TraceR simulation in the
+optimistic mode::
 
-   install
-   userguide
-   tutorial
-   autogen/doxygen
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    mpirun -np <p> ../traceR --sync=3  -- <network_config> <tracer_config>
 
 Some useful options to use with TraceR:
 
@@ -35,3 +19,21 @@ Some useful options to use with TraceR:
 --extramem             number of messages in ROSS's extra message buffer (each message is ~500 bytes, 100K should work for most cases)
 --max-opt-lookahead    leash on optimistic execution in nanoseconds (1 microsecond is a good value)
 --timer-frequency      frequency with which PE0 should print current virtual time
+
+Creating a TraceR configuration file
+------------------------------------
+
+This is the format for the TraceR config file::
+
+    <global map file>
+    <num jobs>
+    <Trace path for job0> <map file for job0> <number of ranks in job0> <iterations (use 1 if running in normal mode)>
+    <Trace path for job1> <map file for job1> <number of ranks in job1> <iterations (use 1 if running in normal mode)>
+    ...
+    <Trace path for jobN> <map file for jobN> <number of ranks in jobN> <iterations (use 1 if running in normal mode)>
+
+
+If you do not intend to create global or per-job map files, you can use ``NA``
+instead of them.
+
+Sample TraceR config files can be found in examples/jacobi2d-bigsim/tracer_config (BigSim) or examples/stencil4d-otf/tracer_config (OTF)

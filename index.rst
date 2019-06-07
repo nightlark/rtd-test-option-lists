@@ -1,8 +1,3 @@
-
-**************
-Lists & Tables
-**************
-
 User Guide
 ==========
 
@@ -29,6 +24,11 @@ Creating a TraceR configuration file
 ------------------------------------
 
 This is the format for the TraceR config file::
+
+
+**************
+Lists & Tables
+**************
 
 .. contents:: Table of Contents
 
